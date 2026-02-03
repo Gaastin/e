@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ service['name'] }} - XModel Roblox</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: linear-gradient(to bottom, #2d2d44, #3a3a5a); color: #e2e8f0; }
+    .neon { text-shadow: 0 0 12px #a78bfa; }
+  </style>
+</head>
+<body>
+  <header class="bg-gray-800/70 backdrop-blur-md border-b border-indigo-900/50 sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold neon text-indigo-300">XModel Roblox</h1>
+      <nav class="space-x-6">
+        <a href="/store" class="hover:text-indigo-300 transition">Servicios</a>
+        <a href="/admin" class="hover:text-indigo-300 transition">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-2 gap-12">
+      <div>
+        {% if service['image'] %}
+          <img src="{{ url_for('static', filename='images/' + service['image']) }}" alt="{{ service['name'] }}" class="rounded-2xl shadow-2xl w-full object-cover border border-indigo-900/40">
+        {% else %}
+          <div class="w-full aspect-video bg-gray-700 rounded-2xl flex items-center justify-center text-gray-400 border border-indigo-900/40">
+            Sin imagen
+          </div>
+        {% endif %}
+      </div>
+
+      <div>
+        <h1 class="text-4xl font-bold neon text-white mb-4">{{ service['name'] }}</h1>
+        <div class="text-5xl font-extrabold text-indigo-300 mb-8">${{ "%.2f"|format(service['price']) }}</div>
+        
+        <div class="prose prose-invert max-w-none mb-10">
+          <p class="text-lg text-gray-200 whitespace-pre-line">{{ service['description'] }}</p>
+        </div>
+
+        <div class="bg-gray-800/80 backdrop-blur-md p-8 rounded-2xl border border-indigo-900/40">
+          <h2 class="text-2xl font-bold text-white mb-6">Solicitar Servicio</h2>
+          <p class="text-gray-300 mb-8">Completa el formulario y te contacto pronto.</p>
+
+          <form method="POST" class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Nombre o usuario *</label>
+              <input type="text" name="username" required class="w-full px-5 py-3 bg-gray-700 border border-indigo-900/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Contacto (WhatsApp / Discord) *</label>
+              <input type="text" name="contact" required placeholder="+1 ... o usuario#1234" class="w-full px-5 py-3 bg-gray-700 border border-indigo-900/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Usuario Roblox (opcional)</label>
+              <input type="text" name="roblox_user" class="w-full px-5 py-3 bg-gray-700 border border-indigo-900/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Mensaje adicional</label>
+              <textarea name="message" rows="4" class="w-full px-5 py-3 bg-gray-700 border border-indigo-900/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"></textarea>
+            </div>
+            <button type="submit" class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold rounded-lg text-lg transition transform hover:scale-[1.02]">
+              Enviar Solicitud →
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>\n
